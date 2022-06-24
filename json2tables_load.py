@@ -10,7 +10,7 @@ def flatten_df(nested_df):
     if not nested_cols:
         arr_cols = [c[0] for c in nested_df.dtypes if c[1][:5] == 'array']
         if not arr_cols:
-            return nested_df
+            return flatten_df(nested_df)
         else:
             for x in arr_cols:
                nested_df = nested_df.withColumn(x, explode(col(x)))
